@@ -2,14 +2,10 @@ from django import views
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from ecomerce.models import Product
+from ecomerce.models import *
 
 
 # Create your views here.
-def home(request):
-   products = Product.objects.all()
-   context = {'products': products}
-   return render(request, 'store/home.html', context)
 
 def cart(request):
    context = {'number': '100'}
@@ -21,8 +17,28 @@ class Home():
    def login(request):
       return ""
 
-   def home(request):
-      products = Product.objects.all()
+   def book(request):
+      products = Book.objects.all()
+      context = {'products': products}
+      return render(request, 'store/home.html', context)
+   def shoes(request):
+      products = Shoes.objects.all()
+      context = {'products': products}
+      return render(request, 'store/home.html', context)
+   def laptop(request):
+      products = Laptop.objects.all()
+      context = {'products': products}
+      return render(request, 'store/home.html', context)
+   def electronics(request):
+      products = Electronic.objects.all()
+      context = {'products': products}
+      return render(request, 'store/home.html', context)
+   def mobilephones(request):
+      products = MobilePhone.objects.all()
+      context = {'products': products}
+      return render(request, 'store/home.html', context)
+   def clothes(request):
+      products = Clothes.objects.all()
       context = {'products': products}
       return render(request, 'store/home.html', context)
 

@@ -8,75 +8,14 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
-
-class Customer(models.Model):
-	user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
-	name = models.CharField(max_length=200, null=True)
-	email = models.CharField(max_length=200)
-
-	def __str__(self):
-		return self.name
-
-# class Author(models.Model):
-# 	name = models.CharField(max_length=200, primary_key=True)
-
-# class CategoryBook(models.Model):
-# 	name = models.CharField(max_length=200, primary_key=True)
-
-
-# class Book(models.Model):
-# 	id = models.IntegerField(primary_key=True, auto_created=True)
-# 	name = models.CharField(max_length=200)
-# 	price = models.FloatField()
-# 	author=models.ForeignKey(Author.name, on_delete=models.SET_NULL, null=True)
-# 	category=models.ForeignKey(CategoryBook.name, on_delete=models.SET_NULL, null=True)
-# 	saleoff=models.FloatField()
-
-
-# class Brand(models.Model):
-# 	name = models.CharField(max_length=200)
-
-# class MobilePhone(models.Model):
-# 	id = models.IntegerField(primary_key=True, auto_created=True)
-# 	name = models.CharField(max_length=200)
-# 	price = models.FloatField()
-# 	brand = models.ForeignKey(Brand.name, on_delete=models.SET_NULL, null=True)
-
-# class Laptop(models.Model):
-# 	id = models.IntegerField(primary_key=True, auto_created=True)
-# 	name = models.CharField(max_length=200)
-# 	price = models.FloatField()
-# 	ram = models.IntegerField()
-# 	ssd = models.BooleanField()
-# 	brand = models.ForeignKey(Brand.name, on_delete=models.SET_NULL, null=True)
-
-# class Clothes(models.Model):
-# 	id = models.IntegerField(primary_key=True, auto_created=True)
-# 	name = models.CharField(max_length=200)
-# 	price = models.FloatField()
-# 	brand = models.ForeignKey(Brand.name, on_delete=models.SET_NULL, null=True)
-
-# class Shoes(models.Model):
-# 	id = models.IntegerField(primary_key=True, auto_created=True)
-# 	name = models.CharField(max_length=200)
-# 	price = models.FloatField()
-# 	brand = models.ForeignKey(Brand.name, on_delete=models.SET_NULL, null=True)
-
-# class Electronics(models.Model):
-# 	id = models.IntegerField(primary_key=True, auto_created=True)
-# 	name = models.CharField(max_length=200)
-# 	price = models.FloatField()
-# 	brand = models.ForeignKey(Brand.name, on_delete=models.SET_NULL, null=True)
-
-
-class Product(models.Model):
-	name = models.CharField(max_length=200)
-	price = models.FloatField()
-	digital = models.BooleanField(default=False,null=True, blank=True)
+class Book(models.Model):
+	name= models.CharField(max_length=255)
+	author= models.CharField(max_length=255)
+	language= models.CharField(max_length=255)
+	expressed_year= models.CharField(max_length=255)
+	size= models.CharField(max_length=255)
 	image = models.ImageField(default="")
-	def __str__(self):
-		return self.name
-
+	price= models.IntegerField()
 	@property
 	def imageURL(self):
 		try:
@@ -84,20 +23,95 @@ class Product(models.Model):
 		except:
 			url = ''
 		return url
-class Order(models.Model):
-	customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
-	date_ordered = models.DateTimeField(auto_now_add=True)
-	complete = models.BooleanField(default=False)
-	transaction_id = models.CharField(max_length=100, null=True)
 
-	def __str__(self):
-		return str(self.id)
+class MobilePhone(models.Model):
+	name= models.CharField(max_length=255)
+	publicationYear= models.IntegerField()
+	manufacture= models.CharField(max_length=255)
+	storage= models.CharField(max_length=255)
+	ram= models.CharField(max_length=255)
+	price= models.IntegerField()
+	color= models.CharField(max_length=255)
+	image = models.ImageField(default="")
+	@property
+	def imageURL(self):
+		try:
+			url = self.image.url
+		except:
+			url = ''
+		return url
+	def __str__(self) -> str:
+		return str(self.name)
+        
+class Clothes(models.Model):
+	color=models.CharField(max_length=255)
+	size= models.IntegerField()
+	manufacture=models.CharField(max_length=255)
+	material= models.CharField(max_length=255)
+	name= models.CharField(max_length=255)
+	price= models.IntegerField(default=19)
+	image = models.ImageField(default="")
+	@property
+	def imageURL(self):
+		try:
+			url = self.image.url
+		except:
+			url = ''
+		return url
+	def __str__(self) -> str:	
+		return str(self.name)
 
-class OrderItem(models.Model):
-	product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
-	order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
-	quantity = models.IntegerField(default=0, null=True, blank=True)
-	date_added = models.DateTimeField(auto_now_add=True)
+class Laptop(models.Model):
+	name= models.CharField(max_length=255)
+	publicationYear= models.IntegerField()
+	manufacture= models.CharField(max_length=255)
+	storage= models.CharField(max_length=255)
+	ram= models.CharField(max_length=255)
+	color= models.CharField(max_length=255)
+	type=models.CharField(max_length=255)
+	chip= models.CharField(max_length=255)
+	image = models.ImageField(default="")
+	price= models.IntegerField()
+	@property
+	def imageURL(self):
+		try:
+			url = self.image.url
+		except:
+			url = ''
+		return url
+	def __str__(self) -> str:
+		return str(self.name)
 
-class Test(models.Model):
-	name=models.CharField(max_length=200)
+class Shoes(models.Model):
+	color=models.CharField(max_length=255)
+	size= models.IntegerField()
+	manufacture=models.CharField(max_length=255)
+	material= models.CharField(max_length=255)
+	name= models.CharField(max_length=255)
+	image = models.ImageField(default="")
+	price= models.IntegerField()
+	@property
+	def imageURL(self):
+		try:
+			url = self.image.url
+		except:
+			url = ''
+		return url
+	def __str__(self) -> str:
+		return str(self.name)
+
+class Electronic(models.Model):
+	name=models.CharField(max_length=255)
+	publicationYear= models.IntegerField()
+	type= models.CharField(max_length=255)
+	image = models.ImageField(default="")
+	price= models.IntegerField()
+	@property
+	def imageURL(self):
+		try:
+			url = self.image.url
+		except:
+			url = ''
+		return url
+	def __str__(self) -> str:
+		return str(self.name)
